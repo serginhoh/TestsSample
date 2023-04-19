@@ -22,6 +22,7 @@ namespace TestsSample.Controllers.V2.Tests
             //Assert
             Assert.NotNull(result);
             Assert.Equal(result, pessoa);
+            Assert.IsAssignableFrom<Pessoa>(result);
         }
     }
 }

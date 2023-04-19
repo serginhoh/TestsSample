@@ -20,5 +20,6 @@ public class PessoaServiceTests
         //Assert
         Assert.NotNull(result);
         Assert.Equal(pessoa, result);
+        Assert.IsAssignableFrom<Pessoa>(result);
     }
 }

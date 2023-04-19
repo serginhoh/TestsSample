@@ -6,14 +6,13 @@ using TestsSample.Validators;
 
 namespace TestsSample.Controllers.V1.Tests;
 
-public class PessoaControllerTests : IClassFixture<PessoaValidator>
+public class PessoaControllerTests 
 {
-    private readonly IValidator<Pessoa> _validator;
     private readonly IPessoaService _service;
 
-    public PessoaControllerTests(PessoaValidator validator)
+    public PessoaControllerTests()
     {
-        _validator = validator;
+        IValidator<Pessoa> _validator = new PessoaValidator();
         _service = new PessoaService(_validator);
     }
 
@@ -30,6 +29,7 @@ public class PessoaControllerTests : IClassFixture<PessoaValidator>
         //Assert
         Assert.NotNull(result);
         Assert.Equal(result, pessoa);
+        Assert.IsAssignableFrom<Pessoa>(result);
     }
 
     [Fact()]

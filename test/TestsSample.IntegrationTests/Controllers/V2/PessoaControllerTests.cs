@@ -17,26 +17,38 @@ public class PessoaControllerTests : IClassFixture<WebApplicationFactory<Program
     [Fact]
     public async Task Post_V2_Pessoa_Deve_Retornar_Pessoa_HttpStatusCode_OK()
     {
+        //arrange
         using HttpClient client = _factory.CreateClient();
         Pessoa pessoa = new() { Nome = "Teste", Aniversario = new DateTime(2000, 1, 1) };
         StringContent postBody = new(JsonConvert.SerializeObject(pessoa));
         postBody.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+        //Act
         HttpResponseMessage response = await client.PostAsync("v2/Pessoa", postBody);
         string data = await response.Content.ReadAsStringAsync();
+        Pessoa? result = JsonConvert.DeserializeObject<Pessoa?>(data);
+
+        //Assert
         Assert.NotNull(response);
         Assert.NotNull(data);
         Assert.Equal(System.Net.HttpStatusCode.OK, response.StatusCode);
+        Assert.IsAssignableFrom<Pessoa>(result);
     }
 
     [Fact]
     public async Task Post_V2_Pessoa_Deve_Retornar_Erro_Nome_Null_HttpStatusCode_InternalServerError()
     {
+        //Arrange
         using HttpClient client = _factory.CreateClient();
         Pessoa pessoa = new() { Nome = null, Aniversario = new DateTime(2000, 1, 1) };
         StringContent postBody = new(JsonConvert.SerializeObject(pessoa));
         postBody.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+        //Act
         HttpResponseMessage response = await client.PostAsync("v2/Pessoa", postBody);
         string data = await response.Content.ReadAsStringAsync();
+
+        //Assert
         Assert.NotNull(response);
         Assert.NotNull(data);
         Assert.Equal(System.Net.HttpStatusCode.InternalServerError, response.StatusCode);
@@ -45,12 +57,17 @@ public class PessoaControllerTests : IClassFixture<WebApplicationFactory<Program
     [Fact]
     public async Task Post_V2_Pessoa_Deve_Retornar_Erro_Nome_Vazio_HttpStatusCode_InternalServerError()
     {
+        //Arrange
         using HttpClient client = _factory.CreateClient();
         Pessoa pessoa = new() { Nome = "", Aniversario = new DateTime(2000, 1, 1) };
         StringContent postBody = new(JsonConvert.SerializeObject(pessoa));
         postBody.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+        //Act
         HttpResponseMessage response = await client.PostAsync("v2/Pessoa", postBody);
         string data = await response.Content.ReadAsStringAsync();
+
+        //Assert
         Assert.NotNull(response);
         Assert.NotNull(data);
         Assert.Equal(System.Net.HttpStatusCode.InternalServerError, response.StatusCode);
