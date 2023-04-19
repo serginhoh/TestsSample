@@ -33,7 +33,7 @@ public class PessoaControllerTests
     }
 
     [Fact()]
-    public async Task PostPessao_Deve_Retornar_Erro_Menor_De_Idade()
+    public async Task PostPessoa_Deve_Retornar_Erro_Menor_De_Idade()
     {
         //arrange
         Pessoa pessoa = new() { Nome = "Nome Teste", Aniversario = DateTime.Now };
