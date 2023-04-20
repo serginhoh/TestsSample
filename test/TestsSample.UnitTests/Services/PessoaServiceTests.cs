@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Moq;
 using TestsSample.Interfaces;
 using TestsSample.Models;
 
@@ -9,7 +10,7 @@ public class PessoaServiceTests
     [Fact()]
     public async Task AdicionaPessoa_Deve_Retornar_Pessoa()
     {
-        //arrange
+        //Arrange
         InlineValidator<Pessoa> validator = new();
         IPessoaService service = new PessoaService(validator);
         Pessoa pessoa = new() { Nome = "Nome Teste", Aniversario = new DateTime(2000, 1, 1) };

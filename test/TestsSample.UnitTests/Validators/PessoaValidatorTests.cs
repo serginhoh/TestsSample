@@ -1,6 +1,8 @@
 ﻿using FluentValidation;
 using FluentValidation.TestHelper;
+using System.Runtime.CompilerServices;
 using TestsSample.Models;
+using Xunit;
 
 namespace TestsSample.Validators.Tests;
 
@@ -16,52 +18,52 @@ public class PessoaValidatorTests : IClassFixture<PessoaValidator>
     [Fact()]
     public void PessoaValidator_Deve_Retornar_Sem_Erros()
     {
-        //arrange
-        Pessoa pessoa = new() { Nome = "Nome Teste Ok", Aniversario = new DateTime(2000, 1, 1) };
+        //Arrange
+        Pessoa pessoa = new() { Nome = "Nome Usuário", Aniversario = new DateTime(2000, 1, 1) };
 
-        //act
+        //Act
         var result = _validator.TestValidate(pessoa);
 
-        //assert
+        //Assert
         result.ShouldNotHaveAnyValidationErrors();
     }
 
-    [Fact]
+    [Fact()]
     public void PessoaValidator_Deve_Retornar_Erro_Nome_Null()
     {
-        //arrange
+        //Arrange
         Pessoa pessoa = new() { Nome = null, Aniversario = new DateTime(2000, 1, 1) };
 
-        //act
+        //Act
         var result = _validator.TestValidate(pessoa);
 
-        //assert
+        //Assert
         result.ShouldHaveValidationErrorFor(i => i.Nome);
     }
 
-    [Fact]
+    [Fact()]
     public void PessoaValidator_Deve_Retornar_Erro_Nome_Vazio()
     {
-        //arrange
+        //Arrange
         Pessoa pessoa = new() { Nome = "", Aniversario = new DateTime(2000, 1, 1) };
 
-        //act
+        //Act
         var result = _validator.TestValidate(pessoa);
 
-        //assert
+        //Assert
         result.ShouldHaveValidationErrorFor(i => i.Nome);
     }
 
-    [Fact]
+    [Fact()]
     public void PessoaValidator_Deve_Retornar_Erro_Menor_18_Anos()
     {
-        //arrange
-        Pessoa pessoa = new() { Nome = "Nome Ok", Aniversario = DateTime.Now };
+        //Arrange
+        Pessoa pessoa = new() { Nome = "Nome do Usuário", Aniversario = DateTime.Now };
 
-        //act
+        //Act
         var result = _validator.TestValidate(pessoa);
 
-        //assert
+        //Assert
         result.ShouldHaveValidationErrorFor(i => i.Aniversario);
     }
 }

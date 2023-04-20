@@ -1,4 +1,11 @@
-﻿using Moq;
+﻿using Xunit;
+using TestsSample.Controllers.V2;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Moq;
 using TestsSample.Interfaces;
 using TestsSample.Models;
 
@@ -11,17 +18,17 @@ namespace TestsSample.Controllers.V2.Tests
         public async Task PostPessoa_Deve_Retornar_Pessoa()
         {
             //Arrange
-            Pessoa pessoa = new() { Nome = "Nome Teste", Aniversario = new DateTime(2000, 1, 1) };
-            Mock<IPessoaService> moqService = new();
-            moqService.Setup(_ => _.AdicionaPessoa(It.IsAny<Pessoa>())).ReturnsAsync(pessoa);
-            PessoaController controller = new(moqService.Object);
+            Pessoa pessoa = new() { Nome = "Nome Usuário", Aniversario = new DateTime(2000, 1, 1) };
+            Mock<IPessoaService> service = new();
+            service.Setup(_ => _.AdicionaPessoa(It.IsAny<Pessoa>())).ReturnsAsync(pessoa);
+            PessoaController controller = new(service.Object);
 
             //Act
             var result = await controller.PostPessoa(pessoa);
 
             //Assert
             Assert.NotNull(result);
-            Assert.Equal(result, pessoa);
+            Assert.Equal(pessoa, result);
             Assert.IsAssignableFrom<Pessoa>(result);
         }
     }

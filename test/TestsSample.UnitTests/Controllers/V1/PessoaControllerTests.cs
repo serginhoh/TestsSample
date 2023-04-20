@@ -1,4 +1,5 @@
-﻿using TestsSample.Interfaces;
+﻿using Moq;
+using TestsSample.Interfaces;
 using TestsSample.Models;
 using Moq;
 
@@ -10,17 +11,17 @@ public class PessoaControllerTests
     public async Task PostPessoa_Deve_Retornar_Pessoa()
     {
         //Arrange
-        Pessoa pessoa = new() { Nome = "Nome Teste", Aniversario = new DateTime(2000, 1, 1) };
-        Mock<IPessoaService> moqService = new();
-        moqService.Setup(_ => _.AdicionaPessoa(It.IsAny<Pessoa>())).ReturnsAsync(pessoa);
+        Pessoa pessoa = new() { Nome = "Nome Usuário", Aniversario = new DateTime(2000, 1, 1) };
+        Mock<IPessoaService> service = new();
+        service.Setup(_ => _.AdicionaPessoa(It.IsAny<Pessoa>())).ReturnsAsync(pessoa);
         PessoaController controller = new();
 
         //Act
-        var result = await controller.PostPessoa(moqService.Object, pessoa);
+        var result = await controller.PostPessoa(service.Object, pessoa);
 
         //Assert
-        Assert.NotNull(result);
-        Assert.Equal(result, pessoa);
+        Assert.NotNull(result );
+        Assert.Equal(pessoa, result);
         Assert.IsAssignableFrom<Pessoa>(result);
     }
 }
