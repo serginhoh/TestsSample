@@ -1,8 +1,6 @@
 ﻿using FluentValidation;
 using FluentValidation.TestHelper;
-using System.Runtime.CompilerServices;
 using TestsSample.Models;
-using Xunit;
 
 namespace TestsSample.Validators.Tests;
 

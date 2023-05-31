@@ -21,3 +21,11 @@ https://github.com/Moq/moq4/wiki/Quickstart
 https://pt.wikipedia.org/wiki/Objeto_mock
 
 https://docs.fluentvalidation.net/en/latest/testing.html#
+
+https://fluentassertions.com/
+
+https://github.com/fluentassertions/fluentassertions
+
+https://dev.to/mpetrinidev/combine-xunit-with-fluent-assertions-jli
+
+https://rafaelcruz.azurewebsites.net/2016/09/19/fluent-assertion-melhorando-leitura-dos-testes-unitarios/
